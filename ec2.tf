@@ -1,6 +1,6 @@
 # Create a key pair
 resource aws_key_pair mykey {
-  key_name   = "terra-key-ec2"
+  key_name   = "terra-key-ec2-22"
   public_key = file("terra-key-ec2.pub")
   tags = {
 
@@ -11,7 +11,7 @@ resource aws_default_vpc default {
 
 } 
 resource aws_security_group my-sg{
-    name = "automate-sg"
+    name = "${var.env}-automate-sg"
     description = "this will add by terraform "
     vpc_id = aws_default_vpc.default.id
     ingress {
@@ -40,7 +40,7 @@ resource aws_security_group my-sg{
          cidr_blocks = ["0.0.0.0/0"]
 }
     tags = {
-        Name = "automate-sg"
+        Name = "${var.env}-automate-sg"
     }
 }  # Create an EC2 instance  
 resource aws_instance my-ec2 {
@@ -65,7 +65,7 @@ resource aws_instance my-ec2 {
     Environment = var.env
   }
 } 
-resource "aws_instance" "my-ec2-2" {
-  ami           = "unknown"
-  instance_type = "unknown"
-   }
+# resource "aws_instance" "my-ec2-2" {
+#   ami           = "unknown"
+#   instance_type = "unknown"
+#    }
