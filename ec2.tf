@@ -2,6 +2,10 @@
 resource aws_key_pair mykey {
   key_name   = "terra-key-ec2"
   public_key = file("terra-key-ec2.pub")
+  tags = {
+
+  Environment = var.env
+  }
 }
 resource aws_default_vpc default {
 
@@ -41,7 +45,7 @@ resource aws_security_group my-sg{
 }  # Create an EC2 instance  
 resource aws_instance my-ec2 {
   for_each = tomap({
-    emaan-micro= "t3.micro"
+
     emaan-small= "t3.small"
     
     }) # meta argument
