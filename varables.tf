@@ -16,5 +16,5 @@ variable "ec2_ami_id" {
 variable "env" {
   description = "Environment tag for resources"
   type        = string
-  default     = "prd"
+  default     = "dev"
 }

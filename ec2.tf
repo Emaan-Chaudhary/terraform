@@ -43,7 +43,7 @@ resource aws_instance my-ec2 {
   for_each = tomap({
     emaan-micro= "t3.micro"
     emaan-small= "t3.small"
-    emaan-medium= "t3.medium"
+    
     }) # meta argument
    depends_on = [aws_security_group.my-sg, aws_key_pair.mykey]  
    ami = var.ec2_ami_id # ubuntu 20.04 in us-east-1
@@ -58,6 +58,7 @@ resource aws_instance my-ec2 {
    }
    tags = {
     Name = each.key
+    Environment = var.env
   }
 } 
 resource "aws_instance" "my-ec2-2" {
